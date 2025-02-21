@@ -33,7 +33,7 @@
     <div class="quiz-container">
        <div class="container2" >
         <img src="./android-chrome-192x192.png" alt=""width="80px" height="80px" style="50%">
-       <h2  style="float:right;">UTME <span >ENGLISH</span></h2>
+       <h2  style="float:right;">UTME <span id="subject">ENGLISH</span></h2>
 
        </div>
         
@@ -64,7 +64,7 @@
 
     <!-- AI Speak Icon -->
     <div class="ai-icon" onclick="toggleReadQuestion()">🗣️</div>
-
+    <script src="script.js"></script>
     <script>
         let questionData = {};
         let score = 0;
@@ -81,36 +81,7 @@
             speechSynthesis.speak(utterance);
         }
 
-        function fetchQuestion() {
-            fetch('https://questions.aloc.com.ng/api/v2/q?subject=english', {
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                    AccessToken: 'QB-16de424c38e2779aa1f1',
-                },
-                method: 'GET',
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.data && data.data.question) {
-                    questionData = data.data;
-                    document.getElementById('subject').innerText = `Subject: ${data.subject}`;
-                    document.getElementById('question').innerText = questionData.question;
-                    document.getElementById('optionA').innerText = questionData.option.a;
-                    document.getElementById('optionB').innerText = questionData.option.b;
-                    document.getElementById('optionC').innerText = questionData.option.c;
-                    document.getElementById('optionD').innerText = questionData.option.d;
-
-                    document.getElementById('question-count').innerText = `Question: ${questionNumber} out of ${totalQuestions}`;
-                    document.querySelectorAll('input[name="answer"]').forEach(el => el.checked = false);
-
-                    if (autoReadEnabled) readQuestion();
-                }
-            })
-            .catch(error => {
-                document.getElementById('question').innerText = "Error loading question.";
-            });
-        }
+       
 
         function readQuestion() {
             isSpeaking = true;
