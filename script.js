@@ -1,4 +1,4 @@
-fetch('https://questions.aloc.com.ng/api/v2/q?subject=crk', {
+fetch('https://questions.aloc.com.ng/api/v2/q?subject=english', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
