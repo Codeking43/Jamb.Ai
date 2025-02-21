@@ -4,106 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UTME TEST</title>
-    <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
+    <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
-            background: #f4f4f4;
-            text-align: center;
-            position: relative;
-        }
-        .quiz-container {
-            max-width: 600px;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: auto;
-        }
-        .question {
-            font-weight: bold;
-            margin-bottom: 15px;
-            background-color: teal;
-            color: white;
-            padding: 6px;
-        }
-        .options label {
-            display: block;
-            text-align: left;
-            margin: 8px 0;
-            cursor: pointer;
-        }
-        .options input {
-            margin-right: 10px;
-        }
-        .btn {
-            background: #007bff;
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-        }
-        .btn:hover {
-            background: #0056b3;
-        }
-        .result {
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 10px;
-            color: green;
-        }
-        .ai-icon {
-            position: fixed;
-            top: 480px;
-            right: 60px;
-            background: transparent;
-      
-            font-size: 24px;
-          
-       
-            border: 0;
-            cursor: pointer;
-          
-        }
-      
-        .recent-answers {
-            margin-top: 20px;
-            text-align: left;
-            background: white;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 20px auto;
-        }
-        .recent-answers h3 {
-            margin: 0;
-            color: #007bff;
-        }
-        .recent-answers p {
-            margin: 5px 0;
-        }
-        @media (max-width: 600px) {
-            .quiz-container, .recent-answers {
-                width: 90%;
-            }
-            .ai-icon {
-                bottom: 10px;
-                right: 10px;
-            }
-        }
+     
+    
     </style>
 </head>
 <body>
+      
+    <li id="menu">&#9776; </li>
+    <br><br>
+    <header>
+        
+        <nav>
+        
+            <li>HOME</li>
+            
+            <li><a href="" id="{registerCourse}" style="background-color: teal;">   E-COURSE</a></li>
+            <li><a href="" id="{registerCourse}">E-NOTE</a></li>
+            <li><a href="" id="{registerCourse} " class="active">E-TEST</a></li>
+        
+            <li>🗣️</li>
+        </nav>
+
+    </header>
+    <br>
     <div class="quiz-container">
-        <h2>UTME </h2>
-        <h1 id="subject"></h1>
+       <div class="container2" >
+        <img src="./android-chrome-192x192.png" alt=""width="80px" height="80px" style="50%">
+       <h2  style="float:right;">UTME <span >ENGLISH</span></h2>
+
+       </div>
+        
+        <br>
         <p id="question" class="question">Loading question...</p>
 
         <div class="options">
@@ -112,8 +46,13 @@
             <label>C <input type="radio" name="answer" value="C"> <span id="optionC"></span></label>
             <label>D <input type="radio" name="answer" value="D"> <span id="optionD"></span></label>
         </div>
-
+        
         <button class="btn" onclick="submitAnswer()">Submit Answer</button>
+      
+        <br>
+        <p id="question-count" class="question-count">  Question: 1 out of 20</p>
+  <br><hr>
+        <button class="toggle-tts" onclick="toggleSpeech()">Stop AI Voice</button>
         <p class="result" id="score"></p>
     </div>
 
@@ -124,18 +63,20 @@
     </div>
 
     <!-- AI Speak Icon -->
-    <div class="ai-icon" onclick="readQuestion()"><i class='bx bxs-bot' style="font-size:33px; background-color:teal;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); padding: 14px 12px; border-radius: 50%;"></i>
-    <br>
-    Chat
-    </div>
+    <div class="ai-icon" onclick="toggleReadQuestion()">🗣️</div>
 
     <script>
         let questionData = {};
         let score = 0;
-        let speechSynthesis = window.speechSynthesis;
+        let questionNumber = 1;
+        let totalQuestions = 20;
         let recentAnswers = [];
+        let speechSynthesis = window.speechSynthesis;
+        let isSpeaking = false;
+        let autoReadEnabled = false;
 
         function speak(text) {
+            if (!autoReadEnabled) return;
             let utterance = new SpeechSynthesisUtterance(text);
             speechSynthesis.speak(utterance);
         }
@@ -151,11 +92,8 @@
             })
             .then(response => response.json())
             .then(data => {
-                console.log('API Data:', data);
-
                 if (data.data && data.data.question) {
                     questionData = data.data;
-
                     document.getElementById('subject').innerText = `Subject: ${data.subject}`;
                     document.getElementById('question').innerText = questionData.question;
                     document.getElementById('optionA').innerText = questionData.option.a;
@@ -163,21 +101,20 @@
                     document.getElementById('optionC').innerText = questionData.option.c;
                     document.getElementById('optionD').innerText = questionData.option.d;
 
-                    // Clear selected answer
+                    document.getElementById('question-count').innerText = `Question: ${questionNumber} out of ${totalQuestions}`;
                     document.querySelectorAll('input[name="answer"]').forEach(el => el.checked = false);
-                } else {
-                    console.error("Unexpected API Response:", data);
-                    document.getElementById('question').innerText = "Failed to load question.";
+
+                    if (autoReadEnabled) readQuestion();
                 }
             })
             .catch(error => {
-                console.error('Error fetching question:', error);
                 document.getElementById('question').innerText = "Error loading question.";
             });
         }
 
         function readQuestion() {
-            let questionText = `Question: ${questionData.question}. 
+            isSpeaking = true;
+            let questionText = `Question ${questionNumber}: ${questionData.question}. 
                 Option A: ${questionData.option.a}. 
                 Option B: ${questionData.option.b}. 
                 Option C: ${questionData.option.c}. 
@@ -195,22 +132,32 @@
 
             let userAnswer = selectedOption.value;
             let correctAnswer = questionData.answer.trim().toUpperCase();
+            let correctText = document.getElementById("option" + correctAnswer).innerText;
 
             if (userAnswer === correctAnswer) {
                 score++;
                 speak("Correct! Well done.");
             } else {
-                speak(`Incorrect. The correct answer was ${correctAnswer}.`);
+                speak(`Incorrect. The correct answer was ${correctText}.`);
             }
             document.getElementById("score").innerText = `Score: ${score}`;
 
-            // Store recent question & answer
-            recentAnswers.unshift(`<p><strong>Q:</strong> ${questionData.question} <br> ✅ <strong>Answer:</strong> ${correctAnswer}</p>`);
-            if (recentAnswers.length > 5) recentAnswers.pop(); // Keep only last 5
-
+            recentAnswers.unshift(`<p><strong>Q${questionNumber}:</strong> ${questionData.question} <br> ✅ <strong>Answer:</strong> ${correctText}</p>`);
+            if (recentAnswers.length > 5) recentAnswers.pop();
             document.getElementById("recent-list").innerHTML = recentAnswers.join("");
 
-            setTimeout(fetchQuestion, 2000); // Fetch a new question after 2 seconds
+            questionNumber++;
+            setTimeout(fetchQuestion, 2000);
+        }
+
+        function toggleSpeech() {
+            autoReadEnabled = !autoReadEnabled;
+            speechSynthesis.cancel();
+        }
+
+        function toggleReadQuestion() {
+            autoReadEnabled = !autoReadEnabled;
+            if (autoReadEnabled) readQuestion();
         }
 
         window.onload = fetchQuestion;
