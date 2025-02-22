@@ -1,121 +1,323 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UTME TEST</title>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="style.css">
-    <style>
-     
-    
-    </style>
-</head>
+<html>
+<meta charset="UTF-8">
+<title>UTME</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="w3.css">
+<link rel="shortcut icon" href="./android-chrome-192x192.png" type="image/x-icon">
+<script type="module" src="./auth.js"defer></script>
+<script type="module" src="./main.js"defer></script>
+<script type="module" src="./firebaseConfig.js"defer></script>
+<style>
+
+img{
+    width: 100%;
+}
+
+    .w3-container {
+        text-align: center;
+    }
+    .w3-table {
+        width: 100%;
+    }
+    .w3-button {
+        margin-top: 10px;
+    }
+    fieldset{
+        text-align:left;
+    }
+</style>
 <body>
-      
-   
-    <div class="quiz-container" style="width:100%;">
-       <div class="container2" >
-        <img src="./android-chrome-192x192.png" alt=""width="80px" height="80px" style="50%">
-       <h2  style="float:right;">UTME <span id="subject">ENGLISH</span></h2>
+<div class="w3-display-container">
+    <img src="./jamb-exam.jpg" width="100%"height="650px">
+    <div class="w3-display-middle ">
 
-       </div>
-        
-        <br>
-        <p id="question" class="question">Loading question...</p>
-
-        <div class="options">
-            <label>A <input type="radio" name="answer" value="A"> <span id="optionA"></span></label>
-            <label>B <input type="radio" name="answer" value="B"> <span id="optionB"></span></label>
-            <label>C <input type="radio" name="answer" value="C"> <span id="optionC"></span></label>
-            <label>D <input type="radio" name="answer" value="D"> <span id="optionD"></span></label>
+        <img src="./android-chrome-192x192.png"  style="margin-left: 25px;!important"  class="w3-center" >
+        <div class="w3-card">
+           <p class="w3-tag w3-btn w3-wide w3-green"> Start Preparing Today <span class="w3-btn w3-white" onclick="document.getElementById('id01').style.display='block'">Login</span> </p>
         </div>
+    </div>
+</div>
+<div class=" w3-container w3-black">
+     <p class="w3-tag w3-blue ">OUR SERVICES</p><span class="w3-large w3-text-green"> ||PREPARING FOR THE TASK ABOVE </span>
+     <div class="w3-container w3-row-padding">
+        <div class="w3-third   w3-card-4">
+            
+           <div class="w3-card w3-white">
+            <img src="images (1).jpeg" alt="" >
+             <h3>Practive,Learn and Pass at Ease </h3>
+            <a href="#" class="w3-btn w3-red">Find Out</a>
+           </div>
+           </div>
+           <div class="w3-third w3-card">
+            <div class="w3-card w3-white">
+                <img src="download (1).png" alt="">
+                <h3>Keep your course intact</h3>
+                <a href="#" class="w3-btn w3-red">Find Out</a>
+            </div>
+          
+           
+           </div>
+           <div class="w3-third">
+            <div class="w3-card w3-white">
+                <img src="download.png" alt="">
+                <h3>Join our Online class </h3>
+                <a href="#" class="w3-btn w3-red">Find Out</a>
+            </div>
+          
+           </div>
+     </div>
         
-        <button class="btn" onclick="submitAnswer()">Submit Answer</button>
-      
-        <br>
-        <p id="question-count" class="question-count">  Question: 1 out of 20</p>
-  <br><hr>
-        <button class="toggle-tts" onclick="toggleSpeech()">Stop AI Voice</button>
-        <p class="result" id="score"></p>
-    </div>
+</div>
 
-    <!-- Recent Answers Section -->
-    <div class="recent-answers">
-        <h3>Recent Answers</h3>
-        <div id="recent-list"></div>
-    </div>
 
-    <!-- AI Speak Icon -->
-    <div class="ai-icon" onclick="toggleReadQuestion()">🗣️</div>
-    <script src="script.js"></script>
+
+<div class="w3-container">
+    <h2>Federal Universities in Nigeria</h2>
+    
+    <div class="w3-content w3-display-container" style="max-width:800px">
+
+        <!-- Slide 1: First set of Federal Universities -->
+        <div class="w3-display-container mySlides w3-card w3-padding">
+            <h3>Federal Universities (1-10)</h3>
+            <table class="w3-table w3-bordered">
+                <tr>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Website</th>
+                </tr>
+                <tr>
+                    <td>Abubakar Tafawa Balewa University</td>
+                    <td>Bauchi</td>
+                    <td><a href="https://www.atbu.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Ahmadu Bello University</td>
+                    <td>Zaria, Kaduna State</td>
+                    <td><a href="https://www.abu.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Bayero University</td>
+                    <td>Kano</td>
+                    <td><a href="https://www.buk.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Federal University Gashua</td>
+                    <td>Yobe</td>
+                    <td><a href="https://www.fugashua.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Federal University of Agriculture, Abeokuta</td>
+                    <td>Ogun</td>
+                    <td><a href="https://www.unaab.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Federal University of Petroleum Resources</td>
+                    <td>Delta</td>
+                    <td><a href="https://www.fupre.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Federal University of Technology, Akure</td>
+                    <td>Ondo</td>
+                    <td><a href="https://www.futa.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Federal University of Technology, Minna</td>
+                    <td>Niger</td>
+                    <td><a href="https://www.futminna.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Federal University of Technology, Owerri</td>
+                    <td>Imo</td>
+                    <td><a href="https://www.futo.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Federal University, Dutse</td>
+                    <td>Jigawa</td>
+                    <td><a href="https://www.fud.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Slide 2: Next set of Federal Universities -->
+        <div class="w3-display-container mySlides w3-card w3-padding">
+            <h3>Federal Universities (11-20)</h3>
+            <table class="w3-table w3-bordered">
+                <tr>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Website</th>
+                </tr>
+                <tr>
+                    <td>Federal University, Dutsin-Ma</td>
+                    <td>Katsina</td>
+                    <td><a href="https://www.fudutsinma.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Federal University, Kashere</td>
+                    <td>Gombe</td>
+                    <td><a href="https://www.fukashere.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Federal University, Lafia</td>
+                    <td>Nasarawa</td>
+                    <td><a href="https://www.fulafia.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Federal University, Lokoja</td>
+                    <td>Kogi</td>
+                    <td><a href="https://www.fulokoja.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Federal University, Otuoke</td>
+                    <td>Bayelsa</td>
+                    <td><a href="https://www.fuotuoke.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Federal University, Oye-Ekiti</td>
+                    <td>Ekiti</td>
+                    <td><a href="https://www.fuoye.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Federal University, Wukari</td>
+                    <td>Taraba</td>
+                    <td><a href="https://www.fuwukari.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Michael Okpara University of Agriculture</td>
+                    <td>Abia</td>
+                    <td><a href="https://www.mouau.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Modibbo Adama University of Technology</td>
+                    <td>Adamawa</td>
+                    <td><a href="https://www.mautech.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+                <tr>
+                    <td>Nnamdi Azikiwe University</td>
+                    <td>Anambra</td>
+                    <td><a href="https://www.unizik.edu.ng" target="_blank">Visit</a></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Add more slides for the remaining universities -->
+
+        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094; Prev</button>
+        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">Next &#10095;</button>
+    </div>
+</div>
+
+<script>
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+        var slides = document.getElementsByClassName("mySlides");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (var i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex - 1].style.display = "block";
+    }
+</script>
+   
     <script>
-        let questionData = {};
-        let score = 0;
-        let questionNumber = 1;
-        let totalQuestions = 20;
-        let recentAnswers = [];
-        let speechSynthesis = window.speechSynthesis;
-        let isSpeaking = false;
-        let autoReadEnabled = false;
+        // Toggle Login & Register Forms
+        document.getElementById('loginBtn').addEventListener('click', function () {
+            document.getElementById('loginAuth').style.display = 'block';
+            document.getElementById('RegisterAuth').style.display = 'none';
+        });
 
-        function speak(text) {
-            if (!autoReadEnabled) return;
-            let utterance = new SpeechSynthesisUtterance(text);
-            speechSynthesis.speak(utterance);
-        }
-
-       
-
-        function readQuestion() {
-            isSpeaking = true;
-            let questionText = `Question ${questionNumber}: ${questionData.question}. 
-                Option A: ${questionData.option.a}. 
-                Option B: ${questionData.option.b}. 
-                Option C: ${questionData.option.c}. 
-                Option D: ${questionData.option.d}. 
-                Please select your answer and click submit.`;
-            speak(questionText);
-        }
-
-        function submitAnswer() {
-            let selectedOption = document.querySelector('input[name="answer"]:checked');
-            if (!selectedOption) {
-                alert("Please select an answer!");
-                return;
-            }
-
-            let userAnswer = selectedOption.value;
-            let correctAnswer = questionData.answer.trim().toUpperCase();
-            let correctText = document.getElementById("option" + correctAnswer).innerText;
-
-            if (userAnswer === correctAnswer) {
-                score++;
-                speak("Correct! Well done.");
-            } else {
-                speak(`Incorrect. The correct answer was ${correctText}.`);
-            }
-            document.getElementById("score").innerText = `Score: ${score}`;
-
-            recentAnswers.unshift(`<p><strong>Q${questionNumber}:</strong> ${questionData.question} <br> ✅ <strong>Answer:</strong> ${correctText}</p>`);
-            if (recentAnswers.length > 5) recentAnswers.pop();
-            document.getElementById("recent-list").innerHTML = recentAnswers.join("");
-
-            questionNumber++;
-            setTimeout(fetchQuestion, 2000);
-        }
-
-        function toggleSpeech() {
-            autoReadEnabled = !autoReadEnabled;
-            speechSynthesis.cancel();
-        }
-
-        function toggleReadQuestion() {
-            autoReadEnabled = !autoReadEnabled;
-            if (autoReadEnabled) readQuestion();
-        }
-
-        window.onload = fetchQuestion;
+        document.getElementById('registerBtn').addEventListener('click', function () {
+            document.getElementById('loginAuth').style.display = 'none';
+            document.getElementById('RegisterAuth').style.display = 'block';
+        });
     </script>
+
+    <footer class="w3-footer w3-black">
+        <h2 class="w3-text-teal w3-center">Powered By <span class="w3-text-khaki">CodeKingDev</span> <sup>++</sup></h2>
+    </footer>
+
+<div id="id01" class="w3-modal" style="display: none;">
+    <div class="w3-modal-content">
+        <div class="w3-container"  style="text-align: left;">
+            <span onclick="document.getElementById('id01').style.display='none'"
+                  class="w3-button w3-display-topright w3-tag">&times;</span>
+            <br>
+            <img src="./android-chrome-192x192.png" style="width: 80px;height: 80px;"><span class="w3-tag">Jamb.Ai</span>
+            <br>
+
+            <!-- Login Section -->
+            <div class="w3-container  w3-border w3-card-4" id="loginAuth">
+                <fieldset>
+                    <legend> <h2 class="w3-text-blue">Login</h2></legend>
+                    <label for="loginEmail" class="w3-xlarge w3-text-green">Enter Email Address</label>
+                    <input type="email" class="w3-input w3-border" id="loginEmail" placeholder="Enter Email">
+                    <label for="loginPassword" class="w3-xlarge w3-text-green">Enter Password</label>
+                    <input type="password" class="w3-input w3-border" id="loginPassword" placeholder="Enter Password">
+                </fieldset>
+              <br>
+                <input type="submit" class="w3-btn w3-blue w3-left" id="loginBtn" value="Login">
+                <button class="w3-btn w3-teal w3-right" id="toggleRegBtn"> Register</button>
+                <br>
+                <br>
+            </div>
+
+            <!-- Register Section -->
+            <div class="w3-container w3-border w3-card-4" id="RegisterAuth" style="display: none;">
+                <fieldset>
+                    <legend><h2 class="w3-text-blue">Register</h2></legend>
+                    <label for="registerUsername" class="w3-xlarge w3-text-green">Enter Username</label>
+                    <input type="text" class="w3-input w3-border" id="registerUsername" placeholder="Enter Username">
+                    <label for="registerEmail" class="w3-xlarge w3-text-green">Enter Email Address</label>
+                    <input type="email" class="w3-input w3-border" id="registerEmail" placeholder="Enter Email">
+                    <label for="registerPassword" class="w3-xlarge w3-text-green">Enter Password</label>
+                    <input type="password" class="w3-input w3-border" id="registerPassword" placeholder="Enter Password">
+                    <label for="registerPhone" class="w3-xlarge w3-text-green">Enter Telephone</label>
+                    <input type="tel" class="w3-input w3-border" id="registerPhone" placeholder="Enter Telephone">
+                </fieldset>
+                <br>
+                <input type="submit" class="w3-btn w3-green w3-right" id="registerBtn" value="Register">
+                <button class="w3-btn w3-blue w3-left" id="toggleLognBtn"> Login</button>
+                <br><br>
+            </div>
+
+          
+            <br>
+        </div>
+    </div>
+    <script>
+        
+    let openLogin=document.getElementById('toggleLognBtn');
+    let closeLogin=document.getElementById('toggleRegBtn');
+    openLogin.addEventListener('click',function(){
+        document.getElementById('loginAuth').style.display='block';
+        document.getElementById('RegisterAuth').style.display='none';
+    });
+    closeLogin.addEventListener('click',function(){
+        document.getElementById('loginAuth').style.display='none';
+        document.getElementById('RegisterAuth').style.display='block';
+    });
+  
+    </script>
+</div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
