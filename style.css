@@ -11,7 +11,6 @@ body{
 position: relative;
     background-color: white;
     background-image: linear-gradient(to left,white,rgb(186, 250, 218));
-    user-select:none;
 }
 header{
     padding: auto;
@@ -144,7 +143,7 @@ li:last-child{
 
 @media (max-width: 600px) {
     .quiz-container, .recent-answers {
-        width: 100%;
+        width: 90%;
     }
     .ai-icon {
         bottom: 10px;
