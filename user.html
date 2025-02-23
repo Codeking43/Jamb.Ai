@@ -1,100 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Username</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="w3.css">
-<script type="module">
-import { database } from "./config.js"; // Import Firebase config
-import { ref, get } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
-
-// ✅ Check if user is logged in
-const userId = sessionStorage.getItem("uid");
-if (!userId) {
-    window.location.href = "index.html"; // Redirect to login page if not logged in
-} else {
-    // ✅ Fetch user details from Firebase
-    async function fetchUserData(uid) {
-        try {
-            const userRef = ref(database, "users/" + uid);
-            const snapshot = await get(userRef);
-
-            if (snapshot.exists()) {
-                const userData = snapshot.val();
-                document.getElementById("username").textContent = userData.username || "Unknown";
-                document.getElementById("email").textContent = userData.email || "No Email";
-                document.getElementById("phone").textContent = userData.phone || "Not Provided";
-            } else {
-                console.error("User data not found!");
-            }
-        } catch (error) {
-            console.error("Error fetching user data:", error);
-        }
-    }
-
-    fetchUserData(userId);
-}
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Jamb.Ai</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script type="module" src="home.js"></script>
 </head>
 <body>
-
-<!-- Sidebar -->
-<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
-  <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
-  <div class="w3-padding w3-margin">
-    <h3>User Details</h3>
-    <p><strong>Username:</strong> <span id="username"></span></p>
-    <p><strong>Email:</strong> <span id="email"></span></p>
-    <p><strong>Phone:</strong> <span id="phone"></span></p>
-    <button id="logoutBtn" class="w3-button w3-red">Logout</button>
-  </div>
-</div>
-
-<!-- Page Content -->
-<div class="w3-white w3-padding">
-  <button class="w3-button w3-card-4 w3-xlarge" onclick="w3_open()">☰</button>
-  <img src="./android-chrome-192x192.png" class="w3-right" width="60px" height="60px" alt="">
-</div>
-
-<div class="w3-container w3-row-padding">
-  <div class="w3-third w3-card-4">
-    <div class="w3-card w3-white">
-      <img src="images (1).jpeg" alt="">
-      <h3>Practice, Learn, and Pass at Ease</h3>
-      <a href="#" class="w3-btn w3-red">Find Out</a>
+    <div class="w3-container w3-padding">
+        <h2>Welcome to Jamb.Ai</h2>
+        <div class="w3-card w3-padding w3-margin">
+            <h3>User Details</h3>
+            <p><strong>Username:</strong> <span id="username"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
+            <p><strong>Phone:</strong> <span id="phone"></span></p>
+            <button id="logoutBtn" class="w3-button w3-red">Logout</button>
+        </div>
     </div>
-  </div>
-  <div class="w3-third w3-card">
-    <div class="w3-card w3-white">
-      <img src="download (1).png" alt="">
-      <h3>Keep your course intact</h3>
-      <a href="#" class="w3-btn w3-red">Find Out</a>
-    </div>
-  </div>
-  <div class="w3-third">
-    <div class="w3-card w3-white">
-      <img src="download.png" alt="">
-      <h3>Join our Online Class</h3>
-      <a href="#" class="w3-btn w3-red">Find Out</a>
-    </div>
-  </div>
-</div>
-
-<script>
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-}
-
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-}
-
-// ✅ Logout function: Clears session and redirects to index.html
-document.getElementById("logoutBtn").addEventListener("click", function() {
-    sessionStorage.clear();
-    window.location.href = "index.html";
-});
-</script>
-
 </body>
 </html>
