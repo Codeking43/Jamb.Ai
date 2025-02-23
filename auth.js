@@ -37,7 +37,7 @@ async function login(email, password) {
         sessionStorage.setItem("phone", user.phoneNumber || "Not Provided");
 
         alert(`Login Successful! Welcome ${user.displayName || "User"}`);
-        window.location.href = "home.html"; // Redirect to home page
+        window.location.href = "user.html"; // Redirect to home page
     } catch (error) {
         alert(getFriendlyErrorMessage(error.code));
     }
