@@ -3,7 +3,7 @@ import {
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword 
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-import { ref, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+import { ref, set, get } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
 // ✅ Signup Function (Registers user and stores additional details)
 async function signup(username, email, password, phone) {
@@ -19,25 +19,35 @@ async function signup(username, email, password, phone) {
         });
 
         alert("Signup Successful! Please log in.");
-         window.location.href = "index.html"; // Redirect to home page
+        document.getElementById('loginAuth').style.display = 'block';
     } catch (error) {
         alert(getFriendlyErrorMessage(error.code));
     }
 }
 
-// ✅ Login Function (Authenticates and stores user session)
+// ✅ Login Function (Authenticates and fetches user details)
 async function login(email, password) {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
+        const userRef = ref(database, `users/${user.uid}`);
 
-        // Store user session
-        sessionStorage.setItem("username", user.username|| "Unknown User");
-        sessionStorage.setItem("email", user.email);
-        sessionStorage.setItem("phone", user.phone || "Not Provided");
+        // Fetch user details from the database
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+            const userData = snapshot.val();
 
-        alert(`Login Successful! Welcome ${user.username || "User"}`);
-        window.location.href = "user.html"; // Redirect to home page
+            // ✅ Store user details in session storage
+            sessionStorage.setItem("uid", user.uid);
+            sessionStorage.setItem("username", userData.username);
+            sessionStorage.setItem("email", userData.email);
+            sessionStorage.setItem("phone", userData.phone);
+
+            alert(`Login Successful! Welcome ${userData.username}`);
+            window.location.href = "home.html"; // Redirect to home page
+        } else {
+            alert("User data not found!");
+        }
     } catch (error) {
         alert(getFriendlyErrorMessage(error.code));
     }
@@ -57,7 +67,7 @@ function getFriendlyErrorMessage(errorCode) {
         "auth/internal-error": "An internal error occurred. Please try again later."
     };
 
-    return errorMessages[errorCode] ;
+    return errorMessages[errorCode] || "An unexpected error occurred. Please try again.";
 }
 
 // ✅ Export functions
