@@ -44,7 +44,7 @@ async function login(email, password) {
             sessionStorage.setItem("phone", userData.phone);
 
             alert(`Login Successful! Welcome ${userData.username}`);
-            window.location.href = "home.html"; // Redirect to home page
+            window.location.href = "user.html"; // Redirect to home page
         } else {
             alert("User data not found!");
         }
