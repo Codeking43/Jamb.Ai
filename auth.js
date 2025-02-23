@@ -31,9 +31,9 @@ async function login(email, password) {
 
         // ✅ Store user session
         sessionStorage.setItem("uid", user.uid); // Store UID
-        sessionStorage.setItem("email", user.email);
+        sessionStorage.setItem("email", user.phone);
 
-        alert(`Login Successful! Welcome!`+user.username);
+        alert(`Login Successful! Welcome!`);
         window.location.href = "user.html"; // Redirect to home page
     } catch (error) {
         alert(getFriendlyErrorMessage(error.code));
