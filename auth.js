@@ -24,34 +24,22 @@ async function signup(username, email, password, phone) {
         alert(getFriendlyErrorMessage(error.code));
     }
 }
-
-// ✅ Login Function (Authenticates and fetches user details)
 async function login(email, password) {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-        const userRef = ref(database, `users/${user.uid}`);
 
-        // Fetch user details from the database
-        const snapshot = await get(userRef);
-        if (snapshot.exists()) {
-            const userData = snapshot.val();
+        // ✅ Store user session
+        sessionStorage.setItem("uid", user.uid); // Store UID
+        sessionStorage.setItem("email", user.email);
 
-            // ✅ Store user details in session storage
-            sessionStorage.setItem("uid", user.uid);
-            sessionStorage.setItem("username", userData.username);
-            sessionStorage.setItem("email", userData.email);
-            sessionStorage.setItem("phone", userData.phone);
-
-            alert(`Login Successful! Welcome ${userData.username}`);
-            window.location.href = "user.html"; // Redirect to home page
-        } else {
-            alert("User data not found!");
-        }
+        alert(`Login Successful! Welcome!`);
+        window.location.href = "home.html"; // Redirect to home page
     } catch (error) {
         alert(getFriendlyErrorMessage(error.code));
     }
 }
+
 
 // ✅ Function to map Firebase errors to user-friendly messages
 function getFriendlyErrorMessage(errorCode) {
