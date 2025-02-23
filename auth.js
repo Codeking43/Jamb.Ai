@@ -19,7 +19,7 @@ async function signup(username, email, password, phone) {
         });
 
         alert("Signup Successful! Please log in.");
-        document.getElementById('loginAuth').style.display = 'block';
+         window.location.href = "index.html"; // Redirect to home page
     } catch (error) {
         alert(getFriendlyErrorMessage(error.code));
     }
