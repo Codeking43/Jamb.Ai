@@ -32,11 +32,11 @@ async function login(email, password) {
         const user = userCredential.user;
 
         // Store user session
-        sessionStorage.setItem("username", user.displayName || "Unknown User");
+        sessionStorage.setItem("username", user.username|| "Unknown User");
         sessionStorage.setItem("email", user.email);
-        sessionStorage.setItem("phone", user.phoneNumber || "Not Provided");
+        sessionStorage.setItem("phone", user.phone || "Not Provided");
 
-        alert(`Login Successful! Welcome ${user.displayName || "User"}`);
+        alert(`Login Successful! Welcome ${user.username || "User"}`);
         window.location.href = "user.html"; // Redirect to home page
     } catch (error) {
         alert(getFriendlyErrorMessage(error.code));
