@@ -4,11 +4,34 @@
 <title>Username</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="w3.css">
-<script type="module" src="home.js"></script>
+<script type="module">
+import { auth, database } from "./firebaseConfig.js";
+import { ref, get } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+// ✅ Redirect to index.html if user is not logged in
+const userId = sessionStorage.getItem("uid");
+if (!userId) {
+    window.location.href = "index.html";
+} else {
+    // ✅ Fetch user details from Firebase Realtime Database
+    async function fetchUserData(uid) {
+        const userRef = ref(database, "users/" + uid);
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+            const userData = snapshot.val();
+            document.getElementById("username").textContent = userData.username || "Unknown";
+            document.getElementById("email").textContent = userData.email || "No Email";
+            document.getElementById("phone").textContent = userData.phone || "Not Provided";
+        } else {
+            console.error("User data not found!");
+        }
+    }
+
+    fetchUserData(userId);
+}
+</script>
 </head>
 <body>
-
-
 
 <!-- Sidebar -->
 <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
@@ -63,14 +86,9 @@ function w3_close() {
 
 // ✅ Logout function: Clears session and redirects to index.html
 document.getElementById("logoutBtn").addEventListener("click", function() {
-    sessionStorage.clear();  // Clears user session
-    window.location.href = "index.html";  // Redirect to login page
+    sessionStorage.clear();
+    window.location.href = "index.html";
 });
-
-// ✅ Populate user details from session storage
-document.getElementById("username").textContent = sessionStorage.getItem("username") || "Unknown";
-document.getElementById("email").textContent = sessionStorage.getItem("email") || "No Email";
-document.getElementById("phone").textContent = sessionStorage.getItem("phone") || "Not Provided";
 </script>
 
 </body>
