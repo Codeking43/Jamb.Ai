@@ -57,7 +57,7 @@ function getFriendlyErrorMessage(errorCode) {
         "auth/internal-error": "An internal error occurred. Please try again later."
     };
 
-    return errorMessages[errorCode] || "An unexpected error occurred. Please try again.";
+    return errorMessages[errorCode] ;
 }
 
 // ✅ Export functions
